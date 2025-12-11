@@ -1,0 +1,18 @@
+nixpacks.version = "1.15.0"
+
+[phases.setup]
+nixPkgs = ["php82", "php82Extensions.mbstring", "php82Extensions.pdo", "php82Extensions.pdo_mysql", "php82Extensions.gd", "php82Extensions.curl", "php82Extensions.zip", "php82Extensions.bcmath", "php82Extensions.xml", "php82Extensions.fileinfo", "php82Extensions.tokenizer"]
+
+[phases.install]
+cmds = [
+  "composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist"
+]
+
+[phases.build]
+cmds = [
+  "chmod +x deploy.sh",
+  "./deploy.sh"
+]
+
+[start]
+cmd = "php -S 0.0.0.0:$PORT -t public"
